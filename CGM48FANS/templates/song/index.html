@@ -1,0 +1,91 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Albums, Singles, and Songs</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% tailwind_css %}
+</head>
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+    <div class="container mx-auto p-4">
+        <section class="min-h-screen">
+            <h1 class="text-4xl font-bold text-center mb-10">Albums and Singles</h1>
+
+            <!-- Albums Section -->
+            <div class="mb-12">
+                <h2 class="text-3xl font-semibold mb-4">Albums</h2>
+
+                {% for album in albums %}
+                    <div class="bg-white shadow-md rounded-lg mb-8 p-6">
+                        <h3 class="text-2xl font-semibold">{{ album.name_album }}</h3>
+                        <p class="text-gray-600">Copies Sold: {{ album.copy }}</p>
+                        <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-4">
+                            <table class="w-full text-sm text-left text-gray-700">
+                                <thead class="text-xs text-white uppercase bg-blue-600">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3">Song Title</th>
+                                        <th scope="col" class="px-6 py-3">Center</th>
+                                        <th scope="col" class="px-6 py-3">Sembatsu Members</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for song in album.list_songs.all %}
+                                        <tr class="bg-blue-500 border-b border-blue-400">
+                                            <td class="px-6 py-4">{{ song }}</td>
+                                            <td class="px-6 py-4">{{ song.name_song }}</td>
+                                            <td class="px-6 py-4">{{ song.center.nickname }}</td>
+                                            <td class="px-6 py-4">
+                                                {% for member in song.sembatsu.all %}
+                                                    {{ member.nickname }}{% if not forloop.last %}, {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <!-- Singles Section -->
+            <div>
+                <h2 class="text-3xl font-semibold mb-4">Singles</h2>
+
+                {% for single in singles %}
+                    <div class="bg-white shadow-md rounded-lg mb-8 p-6">
+                        <h3 class="text-2xl font-semibold">{{ single.name_single }}</h3>
+                        <p class="text-gray-600">Copies Sold: {{ single.copy }}</p>
+                        <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-4">
+                            <table class="w-full text-sm text-left text-gray-700">
+                                <thead class="text-xs text-white uppercase bg-blue-600">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3">Song Title</th>
+                                        <th scope="col" class="px-6 py-3">Center</th>
+                                        <th scope="col" class="px-6 py-3">Sembatsu Members</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for song in single.list_songs.all %}
+                                        <tr class="bg-blue-500 border-b border-blue-400">
+                                            <td class="px-6 py-4">{{ song.name_song }}</td>
+                                            <td class="px-6 py-4">{{ song.center.nickname }}</td>
+                                            <td class="px-6 py-4">
+                                                {% for member in song.sembatsu.all %}
+                                                    {{ member.nickname }}{% if not forloop.last %}, {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+    </div>
+</body>
+</html>

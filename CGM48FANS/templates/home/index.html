@@ -1,0 +1,51 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Member List</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% tailwind_css %}
+</head>
+<body class="bg-green-100 font-rsu leading-normal tracking-normal">
+    <div class="container mx-auto p-4">
+        <section class="flex items-center justify-center min-h-screen">
+            <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                <h1 class="text-3xl font-bold mb-4 text-center">Member List</h1>
+
+                <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                    <table class="w-full text-sm text-left text-gray-700 dark:text-gray-400">
+                        <thead class="text-xs uppercase bg-blue-600 text-white">
+                            <tr>
+                                <th scope="col" class="px-6 py-3">Full Name</th>
+                                <th scope="col" class="px-6 py-3">Nickname</th>
+                                <th scope="col" class="px-6 py-3">Age</th>
+                                <th scope="col" class="px-6 py-3">Team</th>
+                                <th scope="col" class="px-6 py-3">Birthday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for member in members %}
+                                <tr class="bg-blue-500 border-b border-blue-400">
+                                    <th scope="row" class="px-6 py-4 font-medium text-blue-50 dark:text-blue-100">
+                                        {{ member.full_name_thai }}
+                                    </th>
+                                    <td class="px-6 py-4">{{ member.nickname }}</td>
+                                    <td class="px-6 py-4">{{ member.age }}</td>
+                                    <td class="px-6 py-4">{{ member.team }}</td>
+                                    <td class="px-6 py-4">{{ member.bd }}</td>
+                                </tr>
+                            {% empty %}
+                                <tr>
+                                    <td colspan="5" class="px-6 py-4 text-center text-red-500">No members found</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
