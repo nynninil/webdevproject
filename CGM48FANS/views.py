@@ -57,15 +57,15 @@ def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
-            form.save()  # บันทึกข้อมูลผู้ใช้ใหม่
-            messages.success(request, 'บัญชีของคุณได้ถูกสร้างขึ้นแล้ว! คุณสามารถเข้าสู่ระบบได้.')
-            return redirect('song_index')  # เปลี่ยนไปยังหน้าหลักในโฟลเดอร์ song
+            user = form.save()
+            login(request, user)  # Automatically log the user in after signup
+            messages.success(request, 'เย้ สร้าง account สำเร็จแล้วน่ะ ไปลุยกันต่อเลยยยยย!')
+            return redirect('/')  # Redirect to the homepage or another page after signup
         else:
-            messages.error(request, 'กรุณาแก้ไขข้อผิดพลาดด้านล่าง')
-            print(form.errors)  # พิมพ์ข้อผิดพลาดในฟอร์ม
+            messages.error(request, 'เกิดข้อผิดพลาดด ตายแล้วว!!')
     else:
         form = SignUpForm()
-
+    
     return render(request, 'signup/index.html', {'form': form})
 
 
@@ -78,7 +78,7 @@ def signin(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('home')  # เปลี่ยน 'next-page' เป็น URL ของหน้าหลังจากเข้าสู่ระบบ
+                return redirect('/')  # เปลี่ยน 'next-page' เป็น URL ของหน้าหลังจากเข้าสู่ระบบ
             else:
                 messages.error(request, 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง')
     else:

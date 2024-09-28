@@ -23,7 +23,7 @@ urlpatterns = [
     path('', include('CGM48FANS.urls')),
     #path('', members, name='home'),
     path('admin/', admin.site.urls),
-    path('signup/', include('CGM48FANS.urls')),
-    path('signin/', include('CGM48FANS.urls')),
+    # path('signup/', include('CGM48FANS.urls')),
+    # path('signin/', include('CGM48FANS.urls')),
     
 ]
