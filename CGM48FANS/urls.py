@@ -6,4 +6,5 @@ urlpatterns = [
     path('members/', views.members, name='members'),
     # path('informations/', views.members, name='members'),
     path('song/', views.song, name='song'),
+    # path('login/', views.login, name='Login'),
 ]
