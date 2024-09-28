@@ -132,3 +132,10 @@ TAILWIND_APP_NAME = 'CGM48'
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
+
+# Redirect to login if not authenticated
+LOGIN_URL = '/signin/'
+
+# Redirect to this page after a successful login
+LOGIN_REDIRECT_URL = '/home/'
+LOGOUT_REDIRECT_URL = '/signin/'
